@@ -1,3 +1,4 @@
+
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -47,7 +48,7 @@ public class LogAnalyzer
             System.out.println(hour + ": " + hourCounts[hour]);
         }
     }
-    
+
     /**
      * Print the lines of data read by the LogfileReader
      */
@@ -55,4 +56,21 @@ public class LogAnalyzer
     {
         reader.printData();
     }
+
+    /**
+     * Return total number of accesses recorded
+     *
+     * @param  none
+     * @return    The number of accesses recoreded in the log file.
+     */
+    public int numberOfAccesses()
+    {
+        int total = 0;
+        //Add the value in each element of hourCounts to total
+        for (int count = 0; count < hourCounts.length; count++){
+            total += hourCounts[count];
+        }
+        return total;
+    }
+
 }
