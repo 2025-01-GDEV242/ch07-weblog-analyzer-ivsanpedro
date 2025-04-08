@@ -34,7 +34,7 @@ public class LogfileReader implements Iterator<LogEntry>
      */
     public LogfileReader()
     {
-        this("log.txt");
+        this("demoLog.txt");
     }
     
     /**

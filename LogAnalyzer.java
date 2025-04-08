@@ -1,4 +1,3 @@
-import java.util.HashMap;
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -12,7 +11,6 @@ public class LogAnalyzer
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
     //Count the frequency of each element
-    private int[] frequency;
 
     /**
      * Create an object to analyze hourly web accesses.
@@ -60,13 +58,12 @@ public class LogAnalyzer
     }
 
     /**
-     * Return total number of accesses recorded
+     * Return the number of accesses recorded in the log file.
      *
-     * @param  none
-     * @return    The number of accesses recoreded in the log file.
      */
     public int numberOfAccesses()
     {
+        analyzeHourlyData();
         int total = 0;
         //Add the value in each element of hourCounts to total
         for (int count = 0; count < hourCounts.length; count++){
@@ -83,20 +80,11 @@ public class LogAnalyzer
      */
     public int busiestHour()
     {
-        int busiestHour = hourCounts[0];
-        int maxcount = 1;
-
-        for (int i = 0; i < hourCounts.length; i++){
-            int currentHour = hourCounts[i];
-            int currentCount = 0;
-            for (int j = 0; j < hourCounts.length; j++){
-                if (hourCounts[j] == currentHour){
-                    currentCount++;
-                }
-            }
-            if (currentCount > maxcount) {
-                busiestHour = currentHour;
-                maxcount = currentCount;
+        int busiestHour = 0;
+        for (int hour = 1; hour < hourCounts.length; hour++){
+            int hourCount = hourCounts[hour];
+            if (hourCount > hourCounts[busiestHour]){
+                busiestHour = hour;
             }
         }
         return busiestHour;
@@ -110,20 +98,11 @@ public class LogAnalyzer
      */
     public int quietestHour()
     {
-        int quietestHour = hourCounts[0];
-        int minCount = 30000;
-        
-        for (int i = 0; i < hourCounts.length; i++){
-            int currentElement = hourCounts[i];
-            int currentCount = 0;
-            for (int j = 0; j< hourCounts.length; j++){
-                if (hourCounts[j] == currentElement) {
-                    currentCount++;
-                }
-            }
-            if (currentCount < minCount){
-                quietestHour = currentElement;
-                minCount = currentCount;
+        int quietestHour = 0;
+        for (int hour = 1; hour < hourCounts.length; hour++){
+            int hourCount = hourCounts[hour];
+            if (hourCount < hourCounts[quietestHour]){
+                quietestHour = hour;
             }
         }
         return quietestHour;
