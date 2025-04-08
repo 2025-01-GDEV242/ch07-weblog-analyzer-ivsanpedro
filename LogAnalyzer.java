@@ -1,4 +1,4 @@
-
+import java.util.HashMap;
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -11,6 +11,8 @@ public class LogAnalyzer
     private int[] hourCounts;
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
+    //Count the frequency of each element
+    private int[] frequency;
 
     /**
      * Create an object to analyze hourly web accesses.
@@ -73,4 +75,30 @@ public class LogAnalyzer
         return total;
     }
 
+    /**
+     * Returns the hour with the most accesses
+     *
+     * @param  none
+     * @return    the hour with the biggest count
+     */
+    public int busiestHour(int[] hourCounts)
+    {
+        int busiestHour = hourCounts[0];
+        int count = 1;
+        
+        for (int i = 0; i < hourCounts.length; i++){
+            int currentHour = hourCounts[i];
+            int currentCount = 0;
+            for (int j = 0; j < hourCounts.length; j++){
+                if (hourCounts[j] == currentHour){
+                    currentCount++;
+                }
+            }
+            if (currentCount > count) {
+                busiestHour = currentHour;
+                count = currentCount;
+            }
+        }
+        return busiestHour;
+    }
 }
