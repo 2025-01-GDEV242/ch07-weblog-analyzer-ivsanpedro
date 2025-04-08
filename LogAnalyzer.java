@@ -108,4 +108,40 @@ public class LogAnalyzer
         return quietestHour;
     }
 
+    /**
+     * Return the first hour of the busiest two-hour period 
+     *
+     * @param  none
+     * @return    the first hour of the busiest two-hour period
+     */
+    public int busiestTwoHour()
+    {
+        int busiestHour = 0; 
+        int maxCount = 0;
+        for (int hour = 0; hour < hourCounts.length-3; hour+=3){
+            //System.out.println("Busiest hour: " + busiestHour);
+            //System.out.println("Max Count: " + maxCount);
+            //System.out.println("Hour: " + hour);
+            int total = 0;
+            int currentHour = hour;
+            //System.out.println("Current Hour: " + currentHour);
+            for (int hr = 0; hr < 3; hr++){
+                total += hourCounts[currentHour];
+                currentHour++;
+                //System.out.println("Hr: " + hr);
+                //System.out.println("Hour Counts Hr: " + hourCounts[hr]);
+                //System.out.println("Total: " + total);
+            }
+            
+            //System.out.println("Final Total: " + total);
+            if (total > maxCount){
+                busiestHour = hour;
+                maxCount = total;
+            }
+        }
+        
+        return busiestHour;
+    }
+
+
 }
