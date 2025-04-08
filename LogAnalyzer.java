@@ -81,11 +81,11 @@ public class LogAnalyzer
      * @param  none
      * @return    the hour with the biggest count
      */
-    public int busiestHour(int[] hourCounts)
+    public int busiestHour()
     {
         int busiestHour = hourCounts[0];
-        int count = 1;
-        
+        int maxcount = 1;
+
         for (int i = 0; i < hourCounts.length; i++){
             int currentHour = hourCounts[i];
             int currentCount = 0;
@@ -94,11 +94,39 @@ public class LogAnalyzer
                     currentCount++;
                 }
             }
-            if (currentCount > count) {
+            if (currentCount > maxcount) {
                 busiestHour = currentHour;
-                count = currentCount;
+                maxcount = currentCount;
             }
         }
         return busiestHour;
     }
+
+    /**
+     * Returns the hour with the smallest count
+     *
+     * @param  none
+     * @return    the hour with the smallest count 
+     */
+    public int quietestHour()
+    {
+        int quietestHour = hourCounts[0];
+        int minCount = 30000;
+        
+        for (int i = 0; i < hourCounts.length; i++){
+            int currentElement = hourCounts[i];
+            int currentCount = 0;
+            for (int j = 0; j< hourCounts.length; j++){
+                if (hourCounts[j] == currentElement) {
+                    currentCount++;
+                }
+            }
+            if (currentCount < minCount){
+                quietestHour = currentElement;
+                minCount = currentCount;
+            }
+        }
+        return quietestHour;
+    }
+
 }
